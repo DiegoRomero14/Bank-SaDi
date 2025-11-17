@@ -37,7 +37,7 @@ namespace Bank_SaDi.Controllers
             return View(user);
         }
 
-        #region AGREGAR CUENTAS
+       
         [HttpPost]
         public async Task<IActionResult> AddAccount(string accountName, int accountType)
         {
@@ -95,7 +95,7 @@ namespace Bank_SaDi.Controllers
             return random.Next(1000, 10000);
         }
 
-        #endregion
+        
     }
 }
 
