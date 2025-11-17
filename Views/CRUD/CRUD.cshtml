@@ -1,0 +1,187 @@
+﻿@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Admin";
+    Layout = null; // Esto desactiva el Layout
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/CRUD.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="contenedor">
+        <header id="main-header" class="header">
+            <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+            <div class="userop">
+                <div class="info-usuario">
+                    <span>@ViewData["AdminName"]</span><br>
+                    <span>Admin</span>
+                </div>
+                <i class="fa-solid fa-user" onclick="toggleUserMenu()"></i>
+            </div>
+        </header>
+
+        <div id="menuLateral" class="menu-lateral">
+            <i class="fa-solid fa-xmark" onclick="toggleMenu()"></i>
+            <i class="fa-solid fa-building-columns" id="banks"></i>
+            <h3>View change history</h3>
+            <form id="filtro-datos">
+                <button type="button" id="btn-history">View history</button>
+            </form>
+        </div>
+
+        <!-- Contenido de la página principal -->
+        <div id="contenidoPrincipal" class="contenido-principal">
+            <table class="tabla-clientes">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Client Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>National Id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (user.HasAccounts) // Solo mostramos el botón si tiene cuentas
+                                {
+                                    <button class="action-btn view-accounts" onclick="mostrarCuentas(this)">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                }
+                                <button type="button" class="action-btn edit-accounts" onclick="openEditUserModal('@user.UserID', '@user.FirstName', '@user.LastName', '@user.Email', '@user.NationalId')">
+                                    <i class="fa-solid fa-pen"></i>
+                            </td>
+                            <td>@user.UserID</td>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.Email</td>
+                            <td>@user.NationalId</td>
+                        </tr>
+                        <!-- Fila para mostrar las cuentas del usuario -->
+                        <tr class="account-row" style="display: none;">
+                            <td colspan="6">
+                                <div style="width: 100%;">
+                                        <table class="tabla-cuentas" style="width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Action</th>
+                                                    <th>Account</th>
+                                                    <th>Account Type</th>
+                                                    <th>Balance</th>
+                                                    <th>Account Name</th>
+                                                    <th>Active</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var account in user.Accounts)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @if (account.IsActive)
+                                                            {
+                                                                <form id="form-@account.AccountNumber" method="post" asp-action="ToggleAccountStatus" onsubmit="return toggleAccountStatus(@account.AccountNumber);">
+                                                                    <input type="hidden" name="accountNumber" value="@account.AccountNumber" />
+                                                                    <button type="submit" id="button-@account.AccountNumber" class="action-btn delete-account">
+                                                                        <i class="fa-solid fa-xmark"></i>
+                                                                    </button>
+                                                                </form>
+                                                            }
+                                                            else
+                                                            {
+                                                                <form id="form-@account.AccountNumber" method="post" asp-action="ToggleAccountStatus" onsubmit="return toggleAccountStatus(@account.AccountNumber);">
+                                                                    <input type="hidden" name="accountNumber" value="@account.AccountNumber" />
+                                                                    <button type="submit" id="button-@account.AccountNumber" class="action-btn active-account">
+                                                                        <i class="fa-solid fa-check"></i>
+                                                                    </button>
+                                                                </form>
+                                                            }     
+                                                        </td>
+                                                        <td>@account.AccountNumber</td>
+                                                        <td>@account.AccountType</td>
+                                                        <td>$@account.Balance.ToString("N2")</td>
+                                                        <td>@account.NameAccount</td>
+                                                        <td>@account.IsActive</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="editUserModal" class="modal-container" style="display: none;">
+        <div class="modal-body">
+            <span class="close-btn" onclick="closeModal2()"><i class="fa-solid fa-xmark"></i></span>
+            <h2>Editar Usuario</h2><br />
+            <form id="editUser Form" method="post" asp-action="UpdateUser">
+                <input type="hidden" id="editUserId" name="userId">
+
+                <label for="editFirstName">First Name:</label>
+                <input type="text" id="editFirstName" name="firstName"><br />
+
+                <label for="editLastName">Last Name:</label>
+                <input type="text" id="editLastName" name="lastName"><br />
+
+                <label for="editEmail">Email:</label><br />
+                <input type="email" id="editEmail" name="email"><br />
+
+                <label for="editNational">National Id:</label><br />
+                <input type="text" id="editNational" name="nationalid"><br />
+                <div class="submit-savechanges">
+                    <button type="submit">save changes</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Menú desplegable de usuario -->
+    <div id="userMenu" class="user-menu">
+        <p><strong>@ViewData["AdminName"]</strong></p>
+        <p>Admin</p>
+        <form asp-controller="Profile" asp-action="LogOut" method="post">
+            <button type="submit">Log Out</button>
+        </form>
+    </div>
+
+
+    <!-- Modal de Mostrar History -->
+    <div id="modal-History" class="modalH">
+        <div class="modalH-content">
+            <span class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></span>
+            <p id="fieldName">History Change</p>
+            <div class="modalH-body">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/15b1ba9d54.js" crossorigin="anonymous"></script>
+    <script src="~/js/CRUD.js" asp-append-version="true"></script>
+    <script>
+        function mostrarCuentas(button) {
+            const row = button.closest('tr').nextElementSibling; // Selecciona la fila de cuentas
+            if (row.style.display === "none") {
+                row.style.display = "table-row"; // Muestra la fila
+            } else {
+                row.style.display = "none"; // Oculta la fila
+            }
+        }
+    </script>
+</body>
+</html>

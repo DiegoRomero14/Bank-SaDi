@@ -1,0 +1,473 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Estructura principal */
+body, html {
+    height: 100%;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Estilos para el Header */
+.header {
+    background: linear-gradient(135deg, #4a90e2, #1f3a93);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+}
+
+.userop {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+}
+
+.header .userop .fa-user {
+    color: black;
+    background-color: white;
+    font-size: 30px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 100px;
+    padding: 5px;
+}
+
+/* Alineación del ícono del menú a la izquierda */
+.fa-bars {
+    color: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute;
+    left: 20px;
+    font-size: 30px;
+}
+
+/* Menú lateral */
+.menu-lateral {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    background: linear-gradient(135deg, #4a90e2, #1f3a93);
+    color: white;
+    padding: 15px;
+    transition: 0.3s;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .menu-lateral i.fa-xmark {
+        align-self: flex-end;
+        cursor: pointer;
+        color: rgb(49, 49, 49);
+        font-size: 30px;
+    }
+
+#banks {
+    font-size: 120px;
+    margin-bottom: 20px;
+}
+
+#filtro-datos{
+    margin: 20px;
+}
+
+#filtro-datos button {
+    background-color: rgb(49, 49, 49);
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilos para el contenido principal */
+.contenido-principal {
+    margin-left: 0px;
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Tabla de clientes */
+.tabla-clientes, .tabla-cuentas {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .tabla-clientes th, .tabla-clientes td, .tabla-cuentas th, .tabla-cuentas td {
+        padding: 12px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .tabla-clientes th, .tabla-cuentas th {
+        background-color: #9a9a9a; /* Color para los encabezados */
+        color: white; /* Color del texto en los encabezados */
+    }
+
+.action-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 4px;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+    .action-btn i {
+        font-size: 16px;
+    }
+
+.view-accounts {
+    background-color: #3498db;
+    color: white;
+}
+
+.view-movements {
+    background-color: #1f3a93;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.view-accounts:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+}
+
+/* Botón de editar */
+.edit-accounts {
+    background-color: #1f3a93;
+    color: white;
+}
+
+    .edit-accounts:hover {
+        background-color: #415ebd;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(65, 94, 189, 0.5);
+    }
+
+.delete-accounts, .delete-account {
+    background-color: rgb(255, 68, 68);
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.active-account {
+    background-color: #4CAF50;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menu-abierto .menu-lateral {
+    left: 0;
+}
+
+.menu-abierto .contenido-principal {
+    margin-left: 250px;
+}
+
+.menu-abierto .header {
+    padding: 10px 20px;
+}
+
+/* Menú de usuario */
+.user-menu {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    background-color: white;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    padding: 15px;
+    display: none;
+    z-index: 110;
+    text-align: center;
+}
+
+    /* Triángulo en punta para el menú de usuario */
+    .user-menu::before {
+        content: "";
+        position: absolute;
+        top: -10px; /* Ajusta la posición vertical del triángulo */
+        right: 15px; /* Ajusta la posición horizontal del triángulo */
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid white; /* Color del triángulo */
+    }
+
+    .user-menu p {
+        margin: 10px 0;
+    }
+
+    .user-menu button {
+        background: linear-gradient(135deg, #4a90e2, #1f3a93);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .user-menu button:hover {
+            background-color: #4a90e2;
+        }
+
+
+/*MODAL DE HISTORY*/
+/* Estilos para la modal de deposit y el fondo oscuro */
+.modalH {
+    display: none; /* Oculta la modal por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalH-content {
+    background-color: white;
+    border-radius: 6px;
+    width: 1200px;
+    max-width: 90%;
+    max-height: 900px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: showModal 0.3s ease;
+    position: relative;
+
+    padding: 20px 20px 20px 20px;
+}
+
+@keyframes showModal {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modalM-body {
+    padding: 0 50px 30px 50px;
+    max-height: 400px; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto;
+}
+
+#fieldName {
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #333; /* Color del botón */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+    .close-btn:hover {
+        color: #1f3a93;
+    }
+
+.change-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+/* Estilos para la tabla de historial */
+.modalH-body {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+    .modalH-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 1rem;
+        background-color: white;
+    }
+
+    .modalH-body th,
+    .modalH-body td {
+        padding: 0.75rem;
+        text-align: left;
+        border: 1px solid #dee2e6;
+    }
+
+    .modalH-body th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+
+    .modalH-body tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    .modalH-body tr:hover {
+        background-color: #f2f2f2;
+    }
+
+.error {
+    color: red;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Asegurarse de que el modal tenga un tamaño adecuado */
+.modalH-content {
+    width: 90%;
+    max-width: 1200px;
+}
+
+
+/* Contenedor del modal */
+.modal-container {
+    display: flex;
+    position: fixed; /* Cambiado a fixed para que se mantenga en la pantalla */
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+}
+
+/* Contenedor del modal */
+.modal-container {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo del cuerpo del modal */
+.modal-body {
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 30px;
+    border-radius: 10px; /* Bordes redondeados */
+    width: 400px; /* Ancho fijo */
+    max-width: 90%; /* Ancho máximo */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    position: relative; /* Para el botón de cerrar */
+    transition: transform 0.3s ease; /* Transición suave */
+}
+
+/* Estilo del botón de cerrar */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #333; /* Color del botón */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+    .close-btn:hover {
+        color: #1f3a93; /* Color al pasar el ratón */
+    }
+
+/* Estilo de los campos del formulario */
+.modal-body input[type="text"],
+.modal-body input[type="email"] {
+    width: 100%; /* Ancho completo */
+    padding: 10px;
+    margin: 10px 0; /* Espaciado vertical */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: border-color 0.3s ease; /* Transición suave */
+}
+
+    .modal-body input[type="text"]:focus,
+    .modal-body input[type="email"]:focus {
+        border-color: #1f3a93; /* Color del borde al enfocar */
+        outline: none; /* Sin contorno */
+    }
+
+
+.submit-savechanges{
+    justify-content: center;
+  
+}
+
+/* Estilo del botón de guardar */
+.modal-body button[type="submit"] {
+    background: #4a90e2; /* Color al pasar el ratón */
+    color: white; /* Texto blanco */
+    padding: 10px 15px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de mano */
+    transition: all 0.5s ease;
+    margin-top: 15px;
+}
+
+    .modal-body button[type="submit"]:hover {
+        background: #1f3a93; /* Color al pasar el ratón */
+    }
+

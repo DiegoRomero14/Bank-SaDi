@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Log In";
+    Layout = null; // Esto desactiva el Layout
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/Index.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <div class="login_section">
+            <div class="Information_LogIn">
+                <h1 id="NameBank"> Bank SaDi</h1>
+                <h2>Log In</h2>
+                <p>Welcome to your trusted bank</p>
+                <form action="@Url.Action("Login", "Home")" method="post" class="form">
+                    <!-- Start -->
+                    <label>
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" name="Identifier" placeholder="Email o National ID" />
+                    </label>
+                    <!-- End -->
+                    <!-- Start -->
+                    <label>
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="Password" placeholder="Password" />
+                    </label>
+                    <div class="container_error"><span>@ViewData["IPasswordError"]</span></div>
+                    <!-- End -->
+
+                    <div class="option_SigIn">
+                        <a asp-controller="SignIn" asp-action="SignIn">Don't have an account?</a>
+                    </div>
+                    <button type="submit" id="btnLogIn">Log In</button>
+                </form>
+            </div>
+        </div>
+        <div class="right_section"></div>
+    </div>
+
+    <!-- Scripts comunes del sitio -->
+    <script src="https://kit.fontawesome.com/c795c59996.js" crossorigin="anonymous"></script>
+
+    <!-- Aquí es donde llamas a tu archivo JS -->
+    <script src="~/js/Index.js" asp-append-version="true"></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+﻿@model Bank_SaDi.ViewModels.ATMViewModel
+@{
+    ViewData["Title"] = "Bank Operations";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/Bank_Operations.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <main>
+        <div class="section-left">
+            <div class="Title">
+                <h2>
+                    <span id="Bank">Bank</span>
+                    <span id="Operations">Operations</span>
+                </h2>
+            </div>
+            <div class="Information">
+                <div class="list-I">
+                    <h3>Welcome</h3>
+                    <span>@Model.User.FirstName</span>
+                </div>
+                <div class="list-I">
+                    <h3>Account Num</h3>
+                    <span>#@Model.Account.AccountNumber</span>
+                </div>
+                <div class="list-I">
+                    <h3>Type Account</h3>
+                    <span>@Model.Account.AccountTypeName</span>
+                </div>
+                <div class="list-I">
+                    <h3>Balance</h3>
+                    <span>$@Model.Account.Balance</span>
+                </div>
+            </div>
+        </div>
+        <div class="buttons_Operations">
+
+            <button type="button" class="button" id="btn-withdraw">Withdraw</button>
+            <button type="button" class="button" id="btn-deposit">Desposit</button>
+            <button type="button" class="button" id="btn-movements">Show Movements</button>
+            @if (Model.Account.TypeId == 1)
+            {
+                <!-- Mostrar botón de Calcular Intereses solo para cuentas de Ahorros -->
+                <button type="button" class="button" id="btn-interes">Calculate interes</button>
+            }
+            else 
+            {
+                <!-- Mostrar botón de Transferencia solo para cuentas corrientes -->
+                <button type="button" class="button" id="btn-transfer">Transfer</button>
+            }
+        </div>
+    </main>
+
+    <!-- Modal de deposito -->
+    <div id="modal-Deposit" class="modalD">
+        <div class="modalD-content">
+            <div class="modalD-header">
+                <h3>Bank Operations</h3>
+            </div>
+            <form id="formDeposit" asp-action="Deposit" method="post" class="formD">
+                <p id="fieldName">Deposit</p>
+                <div class="modalD-options">
+                    <input type="number" id="InputDesposit" name="InputDeposit" placeholder="Enter the amount to deposit" required>
+                </div>
+                <div class="modalD-optionValues">
+                    <button type="button" onclick="setDepositAmount(20000)">20.000</button>
+                    <button type="button" onclick="setDepositAmount(40000)">40.000</button>
+                    <button type="button" onclick="setDepositAmount(50000)">50.000</button>
+                    <button type="button" onclick="setDepositAmount(100000)">100.000</button>
+                </div>
+                <div class="modalD-buttons">
+                    <button type="submit" class="Dconfirm-btn">Accept</button>
+                    <button type="button" id="DcancelUpdate" class="Dcancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de retiro -->
+    <div id="modal-Withdraw" class="modalW" style="display: none;">
+        <!-- Inicialmente oculto -->
+        <div class="modalW-content">
+            <div class="modalW-header">
+                <h3>Bank Operations</h3>
+            </div>
+            <form id="formWithdraw" asp-action="Withdraw" method="post" class="formW">
+                <p id="fieldName">Withdraw</p>
+                <div class="modalW-options">
+                    <input type="number" id="InputWithdraw" name="InputWithdraw" placeholder="Enter the amount to Withdraw" required>
+                </div>
+                <div class="modalW-optionValues">
+                    <button type="button" class="preset-amount">20,000</button>
+                    <button type="button" class="preset-amount">40,000</button>
+                    <button type="button" class="preset-amount">50,000</button>
+                    <button type="button" class="preset-amount">100,000</button>
+                </div>
+                <div class="modalW-buttons">
+                    <button type="submit" class="Wconfirm-btn">Accept</button>
+                    <button type="button" id="WcancelUpdate" class="Wcancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Calcular interes -->
+    <div id="modal-Interes" class="modalI">
+        <div class="modalI-content">
+            <div class="modalI-header">
+                <h3>Bank Operations</h3>
+            </div>
+            <div class="formI">
+                <p id="fieldName">Calculate Interest</p>
+                <div class="modalI-options">
+                    <input type="text" id="InputInteres" name="InputInteres" value="Nada">
+                </div>
+                <div class="modalI-buttons">
+                    <button type="button" id="IcancelUpdate" class="Icancel-btn">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Transferencia -->
+    <div id="modal-Transfer" class="modalT" style="display:none;">
+        <div class="modalT-content">
+            <div class="modalT-header">
+                <h3>Bank Operations</h3>
+            </div>
+            <form asp-action="Transfer" method="post" class="formT" id="transferForm">
+                <p id="fieldName">Transfer</p>
+                <div class="modalT-options">
+                    <input type="number" id="InputTransferNumAccount" name="InputTransferNumAccount" placeholder="Enter the num account" required>
+                    <input type="number" id="InputTransferAmount" name="InputTransferAmount" placeholder="Enter the amount to transfer" required>
+                </div>
+                <div class="modalT-optionValues">
+                    <button type="button" class="quick-transfer" data-amount="20000">20.000</button>
+                    <button type="button" class="quick-transfer" data-amount="40000">40.000</button>
+                    <button type="button" class="quick-transfer" data-amount="50000">50.000</button>
+                    <button type="button" class="quick-transfer" data-amount="100000">100.000</button>
+                </div>
+                <div class="modalT-buttons">
+                    <button type="submit" class="Tconfirm-btn">Accept</button>
+                    <button type="button" id="TcancelUpdate" class="Tcancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Mostrar Movimientos -->
+    <div id="modal-Movements" class="modalM">
+        <div class="modalM-content">
+            <div class="modalM-header">
+                <h3>Bank Operations</h3>
+            </div>
+            <p id="fieldName">Movements</p>
+            <div class="modalM-body">
+                <table class="movements-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Tipo de Movimiento</th>
+                            <th>Monto</th>
+                            <th>Cuenta de Origen</th>
+                            <th>Cuenta de Destino</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Movements != null && Model.Movements.Any())
+                        {
+                            foreach (var movement in Model.Movements)
+                            {
+                                <tr>
+                                    <td>@movement.TransactionDate.ToString("dd/MM/yyyy")</td>
+                                    @if (movement.TransactionTId == 3 && movement.DestinyAccount == Model.AccountNumberL)
+                                    {
+                                        <td>Transfer received</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@movement.TransactionTypeName</td>
+                                    }
+
+                                    <td>@movement.Amount.ToString("C")</td>
+                                    <td>@(movement.OriginAccountNavigation?.AccountNumber.ToString() ?? "N/A")</td>
+                                    <td>@(movement.DestinyAccountNavigation?.AccountNumber.ToString() ?? "N/A")</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5">No hay movimientos registrados.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modalM-buttons">
+                <button type="button" id="McancelUpdate" class="Mcancel-btn">Back</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts comunes del sitio -->
+    <script src="~/js/Bank_Operations.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/c795c59996.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

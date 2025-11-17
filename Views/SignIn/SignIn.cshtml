@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Sign In";
+    Layout = null; // Esto desactiva el Layout
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/SignIn.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <div class="left_section"> </div>
+        <div class="SingIn_section">
+            <div class="Information_SignIn">
+                <h1 id="NameBank"> Bank SaDi</h1>
+                <h2>Sign In</h2>
+                <p>Join now by creating your account</p>
+                <form action="@Url.Action("Register", "SignIn")" method="post" class="form">
+                    <!-- Start -->
+                    <label>
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" name="FirstName" placeholder="First Name" required />
+                    </label>
+                    <!-- End -->
+                    <!-- Start -->
+                    <label>
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" name="LastName" placeholder="Last Name" required />
+                    </label>
+                    <!-- End -->
+                    <!-- Start -->
+                    <label>
+                        <i class="fa-solid fa-address-card"></i>
+                        <input type="text" name="NationalID" placeholder="National Identification" required />
+                    </label>
+                    <div class="container_error"><span>@ViewData["NationalIDError"]</span></div>
+                    <!-- End -->
+                    <!-- Start -->
+                    <label>
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" name="Email" placeholder="Email" required />
+                    </label>
+                    <div class="container_error"><span>@ViewData["EmailError"]</span></div>
+                    <!-- End -->
+                    <!-- Start -->
+                    <label>
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="Password" placeholder="Password" required />
+                    </label>
+                    <div class="container_error"><span>@ViewData["PasswordError"]</span></div>
+                    <!-- End -->
+                    <!-- Start -->
+                    <label>
+                        <i class="fa-solid fa-key"></i>
+                        <input type="password" name="ConfirmPassword" placeholder="Confirm Password" required />
+                    </label>
+                    <div class="container_error"><span>@ViewData["ConfirmPasswordError"]</span></div>
+                    <!-- End -->
+
+                    <div class="option_LogIn">
+                        <a asp-controller="Home" asp-action="Index">You already have an account?</a>
+                    </div>
+                    <button type="submit" id="btnSignIn">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts comunes del sitio -->
+    <script src="https://kit.fontawesome.com/c795c59996.js" crossorigin="anonymous"></script>
+
+    <!-- Aquí es donde llamas a tu archivo JS -->
+    <script src="~/js/SignIn.js" asp-append-version="true"></script>
+</body>
+</html>

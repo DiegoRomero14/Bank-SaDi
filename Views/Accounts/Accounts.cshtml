@@ -1,0 +1,131 @@
+﻿@model Bank_SaDi.Models.User
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/Accounts.css" asp-append-version="true" />
+</head>
+<body>
+    <main>
+        <div class="tittle">
+            <h2>Accounts</h2>
+        </div>
+        <div class="container_Table">
+            <table class="account-table">
+                <thead>
+                    <tr>
+                        <th> Account number </th>
+                        <th> Account Type</th>
+                        <th> Balance </th>
+                        <th> Account Name</th>
+                        <th>ㅤㅤActiveㅤㅤ</th>
+                        <th>Enter</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model.Accounts != null && Model.Accounts.Any())
+                    {
+                        foreach (var account in Model.Accounts)
+                        {
+                            <tr>
+                                <td id="AccountNumber">#@account.AccountNumber</td>
+                                <td>@account.AccountTypeName</td>
+                                <td>$@account.Balance</td>
+                                <td>@account.NameAccount</td>
+                                <td id="IsActive">@account.IsActive</td>
+                                @if (@account.IsActive is true)
+                                {
+                                    <td>
+                                        @Html.ActionLink("Operations", "Bank_Operations", "Bank_Operations", new { accountNumber = account.AccountNumber }, new { @class = "btn btn-primary" })
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <p id="OperationsNull">Operations</p>
+                                    </td>
+                                }
+
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" id="NoAccountsA">No accounts available.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="container-addAccount">
+            <div class="action-section">
+                <button type="button" id="add-btn" class="btn btn-primary">Add Account</button>
+            </div>
+            <!-- Div oculto con input y label -->
+            <div id="input-box" class="input-box">
+                <form id="add-account-form" method="post" action="@Url.Action("AddAccount", "Accounts")">
+                    <div class="part-name">
+                        <label for="account-name">Account Name:</label>
+                        <input type="text" id="account-name" name="accountName" required />
+                    </div>
+                    <div class="account-type">
+                        <label>Account type:</label>
+                        <div>
+                            <input type="radio" id="savings" name="accountType" value="1" required />
+                            <label for="savings">Savings Account</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="current" name="accountType" value="2" required />
+                            <label for="current">Checking Account</label>
+                        </div>
+                    </div>
+                    <div class="div-agregar">
+                        <button id="add-btn1" type="submit" class="btn btn-primary">Confirm</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+    <!-- Aquí es donde llamas a tu archivo JS -->
+    <script src="~/js/Accounts.js" asp-append-version="true"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener el botón y el div de entrada
+            const addButton = document.getElementById("add-btn");
+            const inputBox = document.getElementById("input-box");
+            // Obtener todos los radios dentro del formulario
+            const radioButtons = document.querySelectorAll('input[type="radio"][name="accountType"]');
+
+            // Inicialmente ocultamos el input-box
+            inputBox.style.display = "none";
+
+            // Agregar evento click al botón
+            addButton.addEventListener("click", function () {
+                // Alternar la visibilidad del input-box
+                if (inputBox.style.display === "none") {
+                    inputBox.style.display = "flex"; // Mostrar el div
+                    document.getElementById("account-name").value = '';
+                    // Limpiar la selección de los radios (deseleccionarlos)
+                    radioButtons.forEach(radio => {
+                        radio.checked = false;
+                    });
+
+                } else {
+                    inputBox.style.display = "none"; // Ocultar el div
+                }
+            });
+        });
+    </script>
+</body>
+</html>

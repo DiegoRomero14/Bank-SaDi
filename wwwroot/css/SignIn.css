@@ -1,0 +1,229 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+/* Reiniciamos los márgenes, rellenos y configuraciones de box-sizing para todos los elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Definimos la tipografía predeterminada para todo el documento */
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    /* Usamos flexbox en el body para centrar los elementos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Definimos el tamaño del body en toda la altura de la pantalla */
+    height: 100vh;
+    /* Color de fondo blanco */
+    background: white;
+}
+
+.container {
+    /* Definimos el tamaño de la caja contenedora */
+    width: 100%;
+    height: 100vh;
+    /* Usamos flexbox para organizar las secciones internas */
+    display: flex;
+}
+
+    .container .left_section {
+        /* Definimos que la sección izquierda ocupa el 60% del ancho */
+        width: 60%;
+        /* Aplicamos una imagen de fondo y la ajustamos para cubrir completamente el espacio */
+        background-image: url('../img/Background_SignIn.png');
+        background-size: cover;
+        /* Redondeamos los bordes */
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .container .SingIn_section {
+        /* La sección derecha ocupa el 40% del ancho */
+        width: 40%;
+        /* Centramos el contenido dentro de esta sección */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+#NameBank {
+    /* Posicionamos el nombre del banco en la esquina superior derecha */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    /* Aplicamos la fuente importada */
+    font-family: "Abril Fatface", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container .Information_SignIn {
+    /* Fondo con degradado y redondeo de bordes */
+    background: linear-gradient(135deg, #53738f, #6a94bf, #7db7e0);
+    border-radius: 25px;
+    /* Ancho del contenedor */
+    width: 80%;
+    /* Sombra para darle relieve al contenedor */
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, .15);
+    /* Añadimos un relleno interior para el contenido */
+    padding: 30px;
+}
+
+    .container .Information_SignIn h2 {
+        /* Color blanco para el título */
+        color: white;
+        /* Tamaño de la fuente del título */
+        font-size: 2.3rem;
+    }
+
+    .container .Information_SignIn p {
+        /* Color gris claro para el párrafo */
+        color: #d9d9d9;
+        /* Espaciado superior */
+        margin-top: 10px;
+    }
+
+    .container .Information_SignIn .form {
+        /* Espaciado superior para el formulario */
+        margin: 30px 0 0 0;
+        /* Relleno interior para los campos del formulario */
+        padding: 0 40px;
+    }
+
+.form label {
+    /* Alineamos el contenido dentro de las etiquetas de formulario */
+    display: flex;
+    align-items: center;
+    /* Espaciado superior */
+    margin-top: 20px;
+    /* Redondeamos los bordes */
+    border-radius: 10px;
+    /* Añadimos una sombra ligera */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    /* Fondo blanco */
+    background-color: white;
+    /* Transición suave para efectos al pasar por encima */
+    transition: all 0.5s ease;
+}
+
+    .form label i {
+        /* Espaciado lateral interno para el ícono */
+        padding-left: 20px;
+        padding-right: 10px;
+        /* Color predeterminado del ícono */
+        color: #a0b1bf;
+        /* Transición para el cambio de color del ícono */
+        transition: all 0.5s ease;
+    }
+
+    .form label:hover i {
+        /* Cambiamos el color del ícono al pasar el ratón por encima */
+        color: #53738f;
+    }
+
+.form :focus-within i {
+    /* Cambiamos el color del ícono cuando el campo de entrada tiene el foco */
+    color: #53738f;
+}
+
+.form label input {
+    /* El campo de entrada ocupa todo el ancho */
+    width: 100%;
+    /* Añadimos relleno interior */
+    padding: 10px;
+    /* Fondo blanco */
+    background-color: white;
+    /* Eliminamos el borde y el contorno predeterminado */
+    border: none;
+    outline: none;
+    /* Redondeamos los bordes */
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    /* Color del texto dentro del input */
+    color: #333;
+    /* Transición suave en el cambio de estado */
+    transition: all 0.5s ease;
+}
+
+.form label:focus-within {
+    /* Fondo gris cuando el campo tiene el foco */
+    background-color: #d7d7d7;
+}
+
+.form label input:focus {
+    /* Fondo gris cuando se selecciona el campo */
+    background-color: #d7d7d7;
+}
+
+.form .option_LogIn {
+    /* Espaciado superior para las opciones de inicio de sesión */
+    margin-top: 10px;
+    /* Alineamos el texto a la izquierda */
+    text-align: left;
+    /* Cambiamos el cursor a pointer */
+    cursor: pointer;
+}
+
+    .form .option_LogIn a {
+        /* Color blanco para los enlaces */
+        color: white;
+        /* Tamaño pequeño de la fuente */
+        font-size: 13px;
+        /* Eliminamos el subrayado de los enlaces */
+        text-decoration: none;
+        /* Transición suave para los efectos */
+        transition: all 0.5s ease;
+    }
+
+        .form .option_LogIn a:hover {
+            /* Aumentamos ligeramente el tamaño de la fuente y cambiamos el color al pasar el ratón */
+            font-size: 13.5px;
+            color: #c9d5df;
+        }
+
+.form button {
+    /* Botón con fondo blanco y bordes redondeados */
+    background-color: white;
+    border-radius: 8px;
+    /* Añadimos relleno interior */
+    padding: 9px 25px;
+    /* Cambiamos el cursor a pointer */
+    cursor: pointer;
+    /* Espaciado superior */
+    margin-top: 10px;
+    /* Eliminamos el borde y el contorno predeterminado */
+    border: none;
+    outline: none;
+    /* Transición suave */
+    transition: all 1s ease;
+}
+
+    .form button:hover {
+        /* Fondo gris al pasar el ratón sobre el botón */
+        background: #ebebeb;
+    }
+
+.container_error {
+    color: #e5e3e3; /* Color del texto del mensaje de error */
+    text-align: left; /* Alineación a la izquierda */
+    margin: 5px 0 0 10px;
+    font-size: 0.8em; /* Tamaño de fuente opcional */
+}
+
+
+/* Estilo para desactivar el fondo azul del autocompletar en Chrome y mantener el color de fondo */
+input:-webkit-autofill {
+    background-color: #ffffff !important; /* Cambia esto al color deseado */
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset; /* Cambia esto al mismo color */
+    box-shadow: 0 0 0 1000px #ffffff inset; /* Cambia esto al mismo color */
+    -webkit-text-fill-color: inherit; /* Mantiene el color del texto */
+}
