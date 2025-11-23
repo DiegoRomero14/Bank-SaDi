@@ -8,7 +8,7 @@ builder.Services.AddControllersWithViews();
 
 // Setting the database context
 builder.Services.AddDbContext<BankSaDiDbContext>(options =>
-    options.UseSqlServer("Server=Samuel\\SQLEXPRESS;Database=BankSaDiDB;Integrated Security=True;Persist Security Info=False;TrustServerCertificate=True"));
+    options.UseSqlServer("Server=DESKTOP-M8IQAG5\\SQLEXPRESS;Database=BankSaDiDB;Integrated Security=True;Persist Security Info=False;TrustServerCertificate=True"));
 
 builder.Services.AddDistributedMemoryCache(); // Usado para almacenar datos en la memoria del servidor.
 builder.Services.AddSession(options =>
