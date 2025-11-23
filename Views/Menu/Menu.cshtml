@@ -1,1 +1,86 @@
-﻿
+﻿@model Bank_SaDi.Models.User
+@{
+    ViewData["Title"] = "Menu";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/Menu.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <main class="main-content">
+        <div class="welcome-section">
+            <div class="welcome-text">
+                <h1>Welcome to Bank SaDi</h1>
+                <h2 class="user-greeting">@Model.FirstName @Model.LastName</h2>
+                <p class="welcome-message">Your trusted financial partner to reach your goals</p>
+            </div>
+            <div class="welcome-stats">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Satisfied Customers</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-globe"></i>
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Years of Experience</span>
+                </div>
+            </div>
+        </div>
+
+        <section class="services-section">
+            <h3>Our Premium Services</h3>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fa-solid fa-piggy-bank"></i>
+                    <h4>Savings Accounts</h4>
+                    <p>Maximize your savings with our preferred rates</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    <h4>Personal Loans</h4>
+                    <p>Financial solutions tailored to your needs</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                    <h4>Fast Transfers</h4>
+                    <p>Send money securely and in real-time</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-percent"></i>
+                    <h4>Competitive Interest Rates</h4>
+                    <p>The best rates on the market for your money</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="features-content">
+                <div class="features-text">
+                    <h3>Why Choose Bank SaDi?</h3>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check-circle"></i> Top-level security</li>
+                        <li><i class="fas fa-check-circle"></i> 24/7 personalized assistance</li>
+                        <li><i class="fas fa-check-circle"></i> State-of-the-art banking technology</li>
+                        <li><i class="fas fa-check-circle"></i> No hidden fees</li>
+                    </ul>
+                </div>
+                <div class="features-image">
+                    <img src="~/img/imginicio1.jpg" alt="Banking services" />
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <h3>Need help?</h3>
+            <p>Our team of experts is available to assist you</p>
+            <a href="" class="contact-button">Contact Us</a>
+        </section>
+    </main>
+</body>
+</html>
