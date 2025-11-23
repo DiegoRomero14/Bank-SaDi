@@ -71,50 +71,50 @@
                         <tr class="account-row" style="display: none;">
                             <td colspan="6">
                                 <div style="width: 100%;">
-                                        <table class="tabla-cuentas" style="width: 100%;">
-                                            <thead>
+                                    <table class="tabla-cuentas" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Action</th>
+                                                <th>Account</th>
+                                                <th>Account Type</th>
+                                                <th>Balance</th>
+                                                <th>Account Name</th>
+                                                <th>Active</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var account in user.Accounts)
+                                            {
                                                 <tr>
-                                                    <th>Action</th>
-                                                    <th>Account</th>
-                                                    <th>Account Type</th>
-                                                    <th>Balance</th>
-                                                    <th>Account Name</th>
-                                                    <th>Active</th>
+                                                    <td>
+                                                        @if (account.IsActive)
+                                                        {
+                                                            <form id="form-@account.AccountNumber" method="post" asp-action="ToggleAccountStatus" onsubmit="return toggleAccountStatus(@account.AccountNumber);">
+                                                                <input type="hidden" name="accountNumber" value="@account.AccountNumber" />
+                                                                <button type="submit" id="button-@account.AccountNumber" class="action-btn delete-account">
+                                                                    <i class="fa-solid fa-xmark"></i>
+                                                                </button>
+                                                            </form>
+                                                        }
+                                                        else
+                                                        {
+                                                            <form id="form-@account.AccountNumber" method="post" asp-action="ToggleAccountStatus" onsubmit="return toggleAccountStatus(@account.AccountNumber);">
+                                                                <input type="hidden" name="accountNumber" value="@account.AccountNumber" />
+                                                                <button type="submit" id="button-@account.AccountNumber" class="action-btn active-account">
+                                                                    <i class="fa-solid fa-check"></i>
+                                                                </button>
+                                                            </form>
+                                                        }
+                                                    </td>
+                                                    <td>@account.AccountNumber</td>
+                                                    <td>@account.AccountType</td>
+                                                    <td>$@account.Balance.ToString("N2")</td>
+                                                    <td>@account.NameAccount</td>
+                                                    <td>@account.IsActive</td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var account in user.Accounts)
-                                                {
-                                                    <tr>
-                                                        <td>
-                                                            @if (account.IsActive)
-                                                            {
-                                                                <form id="form-@account.AccountNumber" method="post" asp-action="ToggleAccountStatus" onsubmit="return toggleAccountStatus(@account.AccountNumber);">
-                                                                    <input type="hidden" name="accountNumber" value="@account.AccountNumber" />
-                                                                    <button type="submit" id="button-@account.AccountNumber" class="action-btn delete-account">
-                                                                        <i class="fa-solid fa-xmark"></i>
-                                                                    </button>
-                                                                </form>
-                                                            }
-                                                            else
-                                                            {
-                                                                <form id="form-@account.AccountNumber" method="post" asp-action="ToggleAccountStatus" onsubmit="return toggleAccountStatus(@account.AccountNumber);">
-                                                                    <input type="hidden" name="accountNumber" value="@account.AccountNumber" />
-                                                                    <button type="submit" id="button-@account.AccountNumber" class="action-btn active-account">
-                                                                        <i class="fa-solid fa-check"></i>
-                                                                    </button>
-                                                                </form>
-                                                            }     
-                                                        </td>
-                                                        <td>@account.AccountNumber</td>
-                                                        <td>@account.AccountType</td>
-                                                        <td>$@account.Balance.ToString("N2")</td>
-                                                        <td>@account.NameAccount</td>
-                                                        <td>@account.IsActive</td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
                             </td>
                         </tr>
@@ -145,7 +145,7 @@
                 <div class="submit-savechanges">
                     <button type="submit">save changes</button>
                 </div>
-                
+
             </form>
         </div>
     </div>
