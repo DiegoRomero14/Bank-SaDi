@@ -25,3 +25,4 @@ public partial class User
 
     public virtual ICollection<ChangesHistory> ChangesHistories { get; set; } = new List<ChangesHistory>();
 }
+
