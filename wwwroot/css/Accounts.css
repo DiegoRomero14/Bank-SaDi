@@ -1,1 +1,176 @@
-﻿
+﻿main {
+    padding: 100px 0 0 15%;
+    display: flex;
+    flex-direction: column; /* Para apilar elementos verticalmente */
+}
+
+.tittle {
+    margin: 40px 0 40px 80px;
+}
+
+    .tittle h2 {
+        font-family: "Abril Fatface", serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 60px;
+    }
+
+.container_Table {
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+    .container_Table table {
+        color: black;
+        font-size: 25px;
+        table-layout: fixed;
+        border-collapse: collapse;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+        border-radius: 15px;
+        overflow: hidden;
+        max-width: 800px;
+        min-width: 800px;
+    }
+
+        .container_Table table thead {
+            background: linear-gradient(135deg, #4e4d96 40%, #2a2a2a 100%);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+        }
+
+            .container_Table table thead th {
+                padding: 20px 15px 20px 15px;
+                font-weight: 600;
+                color: white;
+                box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+            }
+
+        .container_Table table tbody {
+            background-color: white;
+        }
+
+            .container_Table table tbody td, th {
+                padding: 18px;
+                border-bottom: solid 1px rgba(178, 178, 178, 0.8);
+                box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+                white-space: nowrap;
+            }
+
+            .container_Table table tbody th {
+                background-color: #b9b2e587;
+                text-align: left;
+                color: #755656;
+            }
+
+            .container_Table table tbody tr {
+                transition: all 1s ease;
+            }
+
+                .container_Table table tbody tr:hover {
+                    background: #b9b2e587;
+                }
+
+            .container_Table table tbody td {
+                border-left: solid 1px rgba(178, 178, 178, 0.8);
+                position: relative;
+            }
+
+#AccountNumber, #IsActive {
+    text-align: center;
+}
+
+#OperationsNull {
+    cursor: none;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+#NoAccountsA {
+    text-align: center;
+}
+
+.btn {
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    text-align: center; /* Centra el texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Permite que el botón tenga un ancho automático */
+    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+}
+
+.btn-primary {
+    background-color: #4e4d96; /* Color de fondo */
+    color: white; /* Color del texto */
+}
+
+    .btn-primary:hover {
+        background-color: #6a5acd; /* Color de fondo al pasar el ratón */
+    }
+
+.container-addAccount {
+    margin-left: 110px;
+    display: flex;
+}
+
+#add-btn {
+    font-size: 20px;
+}
+
+/* Form Container */
+.input-box {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+/* Form Layout */
+#add-account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Labels */
+input[type="text"],
+input[type="radio"] + label {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Input Fields */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+    input[type="text"]:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+/* Account Type Options */
+.account-type {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+    .account-type div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+/* Button Container */
+.div-agregar {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
