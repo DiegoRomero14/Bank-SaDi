@@ -264,6 +264,8 @@ Server=DESKTOP-M8IQAG5SQLEXPRESS;Database=BankSaDiDB;Integrated Security=True;Pe
 Existe una cadena de conexión alternativa en appsettings.json
 appsettings.json pero no está siendo utilizada activamente por la configuración actual.
 
+Para descargar el script se tiene q descargar desde la carpeta de SchemaBD y descargar el archivo DBFINAL.sql
+
 ## Enrutamiento
 Patrón de ruta predeterminado: {controller=Home}/{action=Index}/{id?}
 Program.cs
