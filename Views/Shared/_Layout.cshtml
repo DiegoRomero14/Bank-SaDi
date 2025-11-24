@@ -1,1 +1,71 @@
-﻿
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/Layout.css" />
+</head>
+<body>
+    <header>
+        <h1>
+            <span class="bank">Bank</span>
+            <span class="sadi">SaDi</span>
+        </h1>
+    </header>
+    <div class="left_bar">
+        <nav>
+            <ul>
+                <div class="option">
+                <li>
+                    <i class="fa-solid fa-house"></i>
+                    <a asp-controller="Menu" asp-action="Menu">Home</a>
+                </li>
+    </div>
+    <div class="option">
+        <li>
+            <i class="fa-solid fa-piggy-bank"></i>
+            <a asp-controller="Accounts" asp-action="Accounts">Accounts</a>
+        </li>
+    </div>
+    <div class="option">
+        <li>
+            <i class="fa-solid fa-address-card"></i>
+            <a asp-controller="Profile" asp-action="Profile">Profile</a>
+        </li>
+    </div>
+    <div class="option" id="lastone">
+        <li>
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <a asp-controller="Profile" asp-action="LogOut">Log Out</a>
+        </li>
+    </div>
+    </ul>
+    </nav>
+    <footer>
+        <div class="NameFooter">
+            <h3>
+                <span class="bank">Bank</span>
+                <span class="sadi">SaDi</span>
+            </h3>
+        </div>
+        <div class="Icons">
+            <i class="fa-brands fa-square-instagram"></i>
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-github"></i>
+            <i class="fa-brands fa-square-x-twitter"></i>
+        </div>
+    </footer>
+    </div>
+
+    <!-- Contenedor para el contenido de la página (RenderBody) -->
+    <div class="container">
+        @RenderBody() <!-- Aquí se renderiza el contenido de cada vista -->
+    </div>
+
+    <!-- Sección para incluir scripts adicionales si las vistas los requieren -->
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Scripts comunes del sitio -->
+    <script src="https://kit.fontawesome.com/c795c59996.js" crossorigin="anonymous"></script>
+</body>
+</html>
